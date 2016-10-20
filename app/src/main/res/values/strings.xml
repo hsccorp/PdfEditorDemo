@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PdfCreatorDemo</string>
+    <string name="pdf_to_img">Convert Pdf to Img</string>
+    <string name="img_to_pdf">Convert Img to pdf</string>
+    <string name="hello_world">Hello World</string>
+    <string name="title_activity_pdf_to_image">PdfToImage</string>
+    <string name="previous">Previous Page</string>
+    <string name="next">Next Page</string>
+</resources>
