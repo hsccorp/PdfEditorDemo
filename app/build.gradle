@@ -17,6 +17,11 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    productFlavors {
+        free {
+            applicationId 'com.hsc.pdfeditor.demo'
+        }
+    }
 
     aaptOptions {
         noCompress "pdf"
