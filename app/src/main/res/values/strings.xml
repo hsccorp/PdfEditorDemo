@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PdfCreatorDemo</string>
+    <string name="app_name">PdfEditorDemo</string>
     <string name="pdf_to_img">Convert Pdf to Img</string>
     <string name="img_to_pdf">Convert Img to pdf</string>
     <string name="hello_world">Hello World</string>
