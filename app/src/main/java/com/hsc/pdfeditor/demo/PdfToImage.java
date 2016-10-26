@@ -3,6 +3,8 @@ package com.hsc.pdfeditor.demo;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfRenderer;
 import android.os.AsyncTask;
 import android.os.Environment;
@@ -14,15 +16,18 @@ import android.view.View;
 import android.widget.ListView;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class PdfToImage extends Activity {
 
     String TAG = "PdfToImage";
     ArrayList<String> pageImageList = new ArrayList<String>();
-    pdfAdapter adapter ;//= new pdfAdapter(this,pageImageList);
+    pdfAdapter adapter ;
     ListView list;
     ProgressDialog progress;
     int pageLimit = 3;
@@ -39,8 +44,6 @@ public class PdfToImage extends Activity {
 
             }
         });
-        //showPdfToImage();
-
     }
     private void showPdfToImage() {
 
@@ -62,8 +65,6 @@ public class PdfToImage extends Activity {
                 String file_path = getIntent().getStringExtra("filePath");
                 try {
                     renderer = new PdfRenderer(ParcelFileDescriptor.open(new File(file_path), ParcelFileDescriptor.MODE_READ_ONLY));
-                    //renderer = new PdfRenderer(getAssets().openFd(pdf_name).getParcelFileDescriptor());
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -87,9 +88,6 @@ public class PdfToImage extends Activity {
                         e.printStackTrace();
                     }
                     page.close();
-                   // page =null;
-                    //ImageView imageView = (ImageView) findViewById(R.id.renderedImageView);
-                    //imageView.setImageBitmap(pageImage);
                 }
                 renderer.close();
                 return pageImageList;
@@ -98,7 +96,6 @@ public class PdfToImage extends Activity {
             @Override
             protected void onPostExecute(ArrayList<String> pageImageList) {
                 super.onPostExecute(pageImageList);
-                //adapter.notifyDataSetChanged();
                 adapter = new pdfAdapter(PdfToImage.this,pageImageList);
                 list = (ListView)findViewById(R.id.img_listview);
                 list.setAdapter(adapter);
@@ -112,9 +109,6 @@ public class PdfToImage extends Activity {
     protected void onResume() {
         super.onResume();
         showPdfToImage();
-//        adapter = new pdfAdapter(PdfToImage.this,pageImageList);
-//        list = (ListView)findViewById(R.id.img_listview);
-//        list.setAdapter(adapter);
         if(adapter != null) {
             adapter.notifyDataSetChanged();
         }
