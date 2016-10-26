@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context="com.hsc.pdfeditor.demo.PdfToImage">
 
-    <ListView
+    <com.hsc.pdfeditor.demo.ZoomListView
         android:id="@+id/img_listview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        android:layout_height="wrap_content"></com.hsc.pdfeditor.demo.ZoomListView>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:paddingBottom="20dp"
-        android:src="@android:drawable/ic_dialog_email"
+        android:src="@drawable/file_edit"
         android:layout_marginLeft="@dimen/fab_margin"
         android:layout_marginRight="@dimen/fab_margin"
         android:layout_marginEnd="35dp"

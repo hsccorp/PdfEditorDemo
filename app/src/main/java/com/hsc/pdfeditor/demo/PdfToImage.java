@@ -13,7 +13,6 @@ import android.os.ParcelFileDescriptor;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
-import android.widget.ListView;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,10 +27,12 @@ public class PdfToImage extends Activity {
     String TAG = "PdfToImage";
     ArrayList<String> pageImageList = new ArrayList<String>();
     pdfAdapter adapter ;
-    ListView list;
+    ZoomListView list;
     ProgressDialog progress;
     int pageLimit = 3;
     FloatingActionButton fab;
+
+    Boolean editModeOn =false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,14 @@ public class PdfToImage extends Activity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(!editModeOn) {
+                    editModeOn = true;
+                    fab.setImageResource(R.drawable.save);
+                }else{
+                    editModeOn =false;
+                    fab.setImageResource(R.drawable.file_edit);
+                }
+                adapter.setEditableMode(editModeOn);
             }
         });
     }
@@ -97,7 +105,7 @@ public class PdfToImage extends Activity {
             protected void onPostExecute(ArrayList<String> pageImageList) {
                 super.onPostExecute(pageImageList);
                 adapter = new pdfAdapter(PdfToImage.this,pageImageList);
-                list = (ListView)findViewById(R.id.img_listview);
+                list = (ZoomListView)findViewById(R.id.img_listview);
                 list.setAdapter(adapter);
                 progress.dismiss();
             }
