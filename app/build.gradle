@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'PdfEditorDemo'
+            keyPassword 'hsc@321'
+            storeFile file('/home/hscuser/Desktop/StudioProjects/key.jks')
+            storePassword 'hsc@321'
+        }
+    }
     compileSdkVersion 23
     buildToolsVersion "24.0.1"
-
     defaultConfig {
         applicationId "com.hsc.pdfeditor.demo"
         minSdkVersion 21
@@ -14,7 +21,13 @@ android {
     buildTypes {
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+            debuggable false
+            renderscriptDebuggable false
+        }
+        debug {
+            debuggable true
         }
     }
     productFlavors {
@@ -22,7 +35,6 @@ android {
             applicationId 'com.hsc.pdfeditor.demo'
         }
     }
-
     aaptOptions {
         noCompress "pdf"
     }
@@ -33,4 +45,5 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
+    //compile 'com.github.angads25:filepicker:1.0.6'
 }
