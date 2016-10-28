@@ -45,9 +45,11 @@ public class PdfToImage extends Activity {
                 if(!editModeOn) {
                     editModeOn = true;
                     fab.setImageResource(R.drawable.save);
+                    list.setScrollable(false);
                 }else{
                     editModeOn =false;
                     fab.setImageResource(R.drawable.file_edit);
+                    list.setScrollable(true);
                 }
                 adapter.setEditableMode(editModeOn);
             }

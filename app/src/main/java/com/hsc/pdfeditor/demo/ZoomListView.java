@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.widget.ListView;
@@ -28,6 +29,8 @@ public class ZoomListView extends ListView {
     private float height;
 
 
+//    Bitmap bmp, editCopy;
+    private boolean scrollable = true;
     public ZoomListView(Context context) {
         super(context);
         mScaleDetector = new ScaleGestureDetector(getContext(), new ScaleListener());
@@ -90,6 +93,9 @@ public class ZoomListView extends ListView {
                 mLastTouchX = x;
                 mLastTouchY = y;
 
+//                bmp = BitmapFactory.decodeFile((String)getAdapter().getItem(this.getFirstVisiblePosition()));
+//                editCopy = bmp.copy(Bitmap.Config.ARGB_8888,true);
+                Log.d("onTouchMove","page no "+this.getFirstVisiblePosition());
                 invalidate();
                 break;
             }
@@ -154,4 +160,15 @@ public class ZoomListView extends ListView {
             return true;
         }
     }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        Log.d("OnInterceptTouch list","returning "+this.scrollable);
+        return (this.scrollable) ? super.onInterceptTouchEvent(ev) : false;
+    }
+
+    public void setScrollable(boolean scrollable) {
+        this.scrollable = scrollable;
+    }
+
 }
